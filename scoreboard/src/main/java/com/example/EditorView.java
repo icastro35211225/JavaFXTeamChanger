@@ -1,7 +1,6 @@
 package com.example;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -30,7 +29,7 @@ public class EditorView implements Observer {
         scoreboardViewModel.updateTeam(team, myName.getText(), myScore.getText());
     }
 
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize() {
         scoreboardViewModel.registerObeserver(this);
         update();
     }
@@ -48,11 +47,12 @@ public class EditorView implements Observer {
     }
 
     public void setTeamName() {
-        try {
-            this.myName.setText(team.getTeamName());
-        } catch (Exception e) {
-            System.err.println(e);
-        }
+        // try {
+        //     this.myName.setText(team.getTeamName());
+        // } catch (Exception e) {
+        //     System.err.println(e);
+        // }
+        this.myName.setText(team.getTeamName());
     }
 
     public void setTeamScore() {

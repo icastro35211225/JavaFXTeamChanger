@@ -1,6 +1,8 @@
 package com.example;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,7 +29,7 @@ public class ScoreboardView implements Observer {
     }
 
     @FXML
-    void clickTeam(ActionEvent event) {
+    void clickTeam(MouseEvent event) {
         Team editTeam = myListView.getSelectionModel().getSelectedItem();
         showEditor(editTeam);
     }

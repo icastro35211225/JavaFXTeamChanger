@@ -1,0 +1,12 @@
+com\example\EditorView.class
+com\example\ScoreboardView.class
+com\example\ScoreboardController.class
+com\example\Team.class
+com\example\ScoreboardController$1.class
+com\example\ScoreboardViewModel.class
+module-info.class
+com\example\App.class
+com\example\View$1.class
+com\example\View.class
+com\example\Observer.class
+com\example\Subject.class
