@@ -1,9 +1,9 @@
 package com.example;
 
 public interface Subject {
-    public void registerObeserver(Observer o);
+    public void registerObeserver(Observer observer);
 
-    public void removeObserver(Observer o);
+    public void removeObserver(Observer observer);
 
     public void notifyObserver();
 }

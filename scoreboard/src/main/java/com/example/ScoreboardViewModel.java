@@ -1,10 +1,22 @@
 package com.example;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ScoreboardViewModel implements Subject {
     private ArrayList<Observer> observers;
     private ArrayList<Team> teams;
+    private int TEAMNAMEMAX = 50;
+    private int TEAMNAMEMIN = 5;
+    private int TEAMSCOREMIN = 0;
+    private int TEAMSCOREMAX = 2000;
+
+    public ScoreboardViewModel() {
+        observers = new ArrayList<Observer>();
+        teams = new ArrayList<Team>();
+        setScoreboard();
+    }
 
     public ArrayList<Team> getTeams() {
         return teams;
@@ -14,16 +26,53 @@ public class ScoreboardViewModel implements Subject {
 
     }
 
-    public void registerObeserver(Observer o) {
-
+    public void registerObeserver(Observer observer) {
+        observers.add(observer);
     }
 
-    public void removeObserver(Observer o) {
-
+    public void removeObserver(Observer observer) {
+        observers.remove(observer);
     }
 
     public void notifyObserver() {
 
     }
 
+    public Boolean teamNameCheck(String teamName) {
+        // DO REGEX for team name
+        // alphanumeric chars
+        // min 5 max 50
+        // no special except for space
+        Pattern pattern = Pattern.compile("[^a-zA-Z0-9 ]", Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(teamName);
+        Boolean isMatch = matcher.find();
+
+        if (teamName.length() < TEAMNAMEMIN || teamName.length() > TEAMNAMEMAX)
+            return false;
+
+        if (isMatch)
+            return false;
+
+        return true;
+    }
+
+    public Boolean teamScoreCheck(String teamScore) {
+        try {
+            int score = Integer.parseInt(teamScore);
+            if (score > TEAMSCOREMAX || score < TEAMSCOREMIN)
+                return false;
+        } catch (Exception e) {
+            System.err.println(e);
+            return false;
+        }
+        return true;
+    }
+
+    public void setScoreboard() {
+        teams.add(new Team());
+        teams.add(new Team());
+        teams.add(new Team());
+        teams.add(new Team());
+        teams.add(new Team());
+    }
 }
