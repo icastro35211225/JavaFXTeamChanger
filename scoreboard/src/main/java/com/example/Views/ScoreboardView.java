@@ -1,8 +1,13 @@
-package com.example;
+package com.example.Views;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import com.example.App;
+import com.example.Observer;
+import com.example.Team;
+import com.example.ViewModels.ScoreboardViewModel;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -36,12 +41,13 @@ public class ScoreboardView implements Observer {
 
     public void showEditor(Team editTeam) {
         try {
-            EditorView editorView = createEditorView(editTeam);// call create editor view
+            EditorView editorView = createEditorView(editTeam);
             FXMLLoader fxmlLoader = createFXMLLoader(editorView);
             Stage stage = createStage(fxmlLoader);
             stage.show();
         } catch (Exception e) {
             System.err.println(e);
+            System.exit(-1);
         }
     }
 
@@ -55,11 +61,12 @@ public class ScoreboardView implements Observer {
     public FXMLLoader createFXMLLoader(EditorView editorView) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("Editor.fxml"));
+            fxmlLoader.setLocation(App.class.getResource("Editor.fxml"));
             fxmlLoader.setController(editorView);
             return fxmlLoader;
         } catch (Exception e) {
             System.err.println(e);
+            System.exit(-2);
         }
         return null;
     }
@@ -73,6 +80,7 @@ public class ScoreboardView implements Observer {
             return stage;
         } catch (Exception e) {
             System.err.println(e);
+            System.exit(-3);
         }
         return null;
     }
@@ -84,7 +92,6 @@ public class ScoreboardView implements Observer {
         }
         myListView.setItems(teams);
         myListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        // MAYBE
-        // myListView.setPrefHeight(teams.size() * 24 + 2);
+        myListView.setPrefHeight(teams.size() * 24 + 12);
     }
 }

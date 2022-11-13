@@ -7,15 +7,19 @@ public class Team {
     String teamName;
     String modifiedDate;
     int score;
+    Boolean isUpdated = false;
 
     public Team() {
         this.teamName = "No Name Given";
         this.score = 0;
+        this.isUpdated = false;
+        setDate();
     }
 
     public Team(String teamName, int score) {
         this.teamName = teamName;
         this.score = score;
+        this.isUpdated = false;
         setDate();
     }
 
@@ -33,6 +37,10 @@ public class Team {
         this.modifiedDate = formatter.format(date);
     }
 
+    public void setIsUpdated(Boolean update) {
+        this.isUpdated = update;
+    }
+
     public String getTeamName() {
         return teamName;
     }
@@ -43,6 +51,10 @@ public class Team {
 
     public String getModifiedDate() {
         return modifiedDate;
+    }
+
+    public Boolean getIsUpdated() {
+        return isUpdated;
     }
 
     public String toString() {

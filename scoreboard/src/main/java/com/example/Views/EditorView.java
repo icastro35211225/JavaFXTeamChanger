@@ -1,7 +1,11 @@
-package com.example;
+package com.example.Views;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import com.example.Observer;
+import com.example.Team;
+import com.example.ViewModels.ScoreboardViewModel;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,14 +28,14 @@ public class EditorView implements Observer {
     @FXML
     private Button mySave;
 
-    @FXML
-    void onSaveClick(ActionEvent event) {
-        scoreboardViewModel.updateTeam(team, myName.getText(), myScore.getText());
-    }
-
     public void initialize() {
         scoreboardViewModel.registerObeserver(this);
         update();
+    }
+
+    @FXML
+    void onSaveClick(ActionEvent event) {
+        scoreboardViewModel.updateTeam(team, myName.getText(), myScore.getText());
     }
 
     public void setTeam(Team team) {
@@ -47,29 +51,17 @@ public class EditorView implements Observer {
     }
 
     public void setTeamName() {
-        // try {
-        //     this.myName.setText(team.getTeamName());
-        // } catch (Exception e) {
-        //     System.err.println(e);
-        // }
         this.myName.setText(team.getTeamName());
     }
 
     public void setTeamScore() {
-        try {
-            this.myScore.setText(Integer.toString(team.getScore()));
-        } catch (Exception e) {
-            System.err.println(e);
-        }
+        this.myScore.setText(Integer.toString(team.getScore()));
+
     }
 
     public void setTeamDate() {
         team.setDate();
-        try {
-            this.myDate.setText(team.getModifiedDate());
-        } catch (Exception e) {
-            System.err.println(e);
-        }
+        this.myDate.setText(team.getModifiedDate());
     }
 
     public void update() {

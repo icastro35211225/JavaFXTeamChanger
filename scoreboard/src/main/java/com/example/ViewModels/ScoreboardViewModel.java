@@ -1,8 +1,14 @@
-package com.example;
+package com.example.ViewModels;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.example.Observer;
+import com.example.Subject;
+import com.example.Team;
+import com.example.Views.EditorView;
+import com.example.Views.ScoreboardView;
 
 public class ScoreboardViewModel implements Subject {
     private ArrayList<Observer> observers;
@@ -22,8 +28,19 @@ public class ScoreboardViewModel implements Subject {
         return teams;
     }
 
-    public void updateTeam(Team team, String teamName, String teamScore) {
-
+    public void updateTeam(Team updatedTeam, String teamName, String teamScore) {
+        System.out.println(teamName + " " + observers.get(observers.size() - 1));
+        if (teamNameCheck(teamName)) {
+            updatedTeam.setTeamName(teamName);
+            updatedTeam.setIsUpdated(true);
+            updatedTeam.setDate();
+        }
+        if (teamScoreCheck(teamScore)) {
+            updatedTeam.setScore(Integer.parseInt(teamScore));
+            updatedTeam.setIsUpdated(true);
+            updatedTeam.setDate();
+        }
+        notifyObserver();
     }
 
     public void registerObeserver(Observer observer) {
@@ -35,22 +52,30 @@ public class ScoreboardViewModel implements Subject {
     }
 
     public void notifyObserver() {
+        Observer editorObserver = null;
 
+        for (Observer currObsvr : observers) {
+            System.out.println(currObsvr);
+            if ((currObsvr instanceof EditorView) && ((EditorView) currObsvr).getTeam().getIsUpdated()) {
+                currObsvr.update();
+                editorObserver = currObsvr;
+            } else if (currObsvr instanceof ScoreboardView) {
+                currObsvr.update();
+            }
+            if (editorObserver != null) {
+                ((EditorView) editorObserver).getTeam().setIsUpdated(false);
+            }
+        }
     }
 
     public Boolean teamNameCheck(String teamName) {
-        // DO REGEX for team name
-        // alphanumeric chars
-        // min 5 max 50
-        // no special except for space
         Pattern pattern = Pattern.compile("[^a-zA-Z0-9 ]", Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(teamName);
-        Boolean isMatch = matcher.find();
 
         if (teamName.length() < TEAMNAMEMIN || teamName.length() > TEAMNAMEMAX)
             return false;
 
-        if (isMatch)
+        if (matcher.find())
             return false;
 
         return true;
