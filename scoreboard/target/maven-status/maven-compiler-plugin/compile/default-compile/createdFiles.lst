@@ -1,9 +1,7 @@
 com/example/Views/ScoreboardView.class
 com/example/App.class
-com/example/Team.class
-com/example/ScoreboardController.class
+com/example/Model/Team.class
+com/example/Model/Observer.class
+com/example/Model/Subject.class
 com/example/ViewModels/ScoreboardViewModel.class
-com/example/ScoreboardController$1.class
-com/example/Observer.class
 com/example/Views/EditorView.class
-com/example/Subject.class

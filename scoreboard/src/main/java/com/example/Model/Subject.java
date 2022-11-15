@@ -1,4 +1,4 @@
-package com.example;
+package com.example.Model;
 
 public interface Subject {
     public void registerObeserver(Observer observer);

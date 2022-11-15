@@ -5,8 +5,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.example.App;
-import com.example.Observer;
-import com.example.Team;
+import com.example.Model.Observer;
+import com.example.Model.Team;
 import com.example.ViewModels.ScoreboardViewModel;
 
 import javafx.collections.FXCollections;

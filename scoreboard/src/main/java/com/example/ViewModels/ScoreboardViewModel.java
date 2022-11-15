@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.example.Observer;
-import com.example.Subject;
-import com.example.Team;
+import com.example.Model.Observer;
+import com.example.Model.Subject;
+import com.example.Model.Team;
 import com.example.Views.EditorView;
 import com.example.Views.ScoreboardView;
 
@@ -29,7 +29,6 @@ public class ScoreboardViewModel implements Subject {
     }
 
     public void updateTeam(Team updatedTeam, String teamName, String teamScore) {
-        System.out.println(teamName + " " + observers.get(observers.size() - 1));
         if (teamNameCheck(teamName)) {
             updatedTeam.setTeamName(teamName);
             updatedTeam.setIsUpdated(true);
@@ -55,16 +54,15 @@ public class ScoreboardViewModel implements Subject {
         Observer editorObserver = null;
 
         for (Observer currObsvr : observers) {
-            System.out.println(currObsvr);
             if ((currObsvr instanceof EditorView) && ((EditorView) currObsvr).getTeam().getIsUpdated()) {
                 currObsvr.update();
                 editorObserver = currObsvr;
             } else if (currObsvr instanceof ScoreboardView) {
                 currObsvr.update();
             }
-            if (editorObserver != null) {
-                ((EditorView) editorObserver).getTeam().setIsUpdated(false);
-            }
+        }
+        if (editorObserver != null) {
+            ((EditorView) editorObserver).getTeam().setIsUpdated(false);
         }
     }
 

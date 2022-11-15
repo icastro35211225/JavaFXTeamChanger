@@ -1,4 +1,4 @@
-package com.example;
+package com.example.Model;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

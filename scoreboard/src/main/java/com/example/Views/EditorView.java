@@ -3,8 +3,8 @@ package com.example.Views;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.example.Observer;
-import com.example.Team;
+import com.example.Model.Observer;
+import com.example.Model.Team;
 import com.example.ViewModels.ScoreboardViewModel;
 
 import javafx.event.ActionEvent;
